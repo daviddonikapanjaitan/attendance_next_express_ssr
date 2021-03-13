@@ -18,6 +18,93 @@ function bcryptFunction(password) {
   });
 }
 
+// Get All
+router.get('/user-role', async function (req, res, next) {
+  try {
+    const user_role_find_all = await model.users_role.findAll({
+      attributes: { exclude: ['password'] },
+    });
+    res.send({
+      status: 'OK',
+      data: user_role_find_all,
+    });
+  } catch (err) {
+    if (err) {
+      console.log(err);
+      res.send({
+        status: 'ERROR',
+        messages: err.messages,
+        data: {},
+      });
+    }
+  }
+});
+
+// GET Users by username
+router.get('/user-role/:username', async function (req, res, next) {
+  try {
+    const userName = req.params.username;
+    const user_role_find_one = await model.users_role.findAll({
+      attributes: { exclude: ['password'] },
+      where: {
+        username: userName,
+      },
+    });
+    if (user_role_find_one.length > 0) {
+      res.send({
+        status: 'OK',
+        desc: user_role_find_one,
+      });
+    } else {
+      res.send({
+        status: 'ERROR',
+        desc: 'Username not found',
+      });
+    }
+  } catch (err) {
+    if (err) {
+      console.log(err);
+      res.send({
+        status: 'ERROR',
+        messages: err.messages,
+        data: {},
+      });
+    }
+  }
+});
+
+// Delete by username
+router.delete('/user-role', async function (req, res, next) {
+  try {
+    const userName = req.body.username;
+    const user_role_find_one = await model.users_role.destroy({
+      where: {
+        username: userName,
+      },
+    });
+    if (user_role_find_one) {
+      res.send({
+        status: 'OK',
+        desc: `${userName} has been destroyed`,
+      });
+    } else {
+      res.send({
+        status: 'ERROR',
+        desc: 'Username not found',
+      });
+    }
+  } catch (err) {
+    if (err) {
+      console.log(err);
+      res.send({
+        status: 'ERROR',
+        messages: err.messages,
+        data: {},
+      });
+    }
+  }
+});
+
 // POST users
 router.post('/user-role', async function (req, res, next) {
   try {
