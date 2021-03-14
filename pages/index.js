@@ -1,23 +1,41 @@
-import Link from 'next/link';
+import Header from '../components/Header';
 
 export default function home() {
   return (
-    <div>
-      <nav>
-        <ul>
-          <li>
-            <Link href="/post/david">post</Link>
-          </li>
-        </ul>
-        <ul>
-          <li>
-            <Link href="/coba">coba</Link>
-          </li>
-        </ul>
-      </nav>
-      <h1>Home Page</h1>
-      <h1>Custom Server Express</h1>
-      <p>We add Express to out project then create file server.js</p>
-    </div>
+    <>
+      <Header />
+      <div className="wrapper fadeInDown">
+        <div id="formContent">
+          <div className="fadeIn first">Login Page</div>
+          <form>
+            <input
+              type="text"
+              id="login"
+              className="fadeIn second"
+              name="login"
+              placeholder="login"
+            />
+            <input
+              type="text"
+              id="password"
+              className="fadeIn third"
+              name="login"
+              placeholder="password"
+            />
+            <input type="submit" className="fadeIn fourth" value="Log In" />
+          </form>
+
+          <div id="formFooter">
+            <a className="underlineHover" href="#">
+              Forgot Password?
+            </a>
+            <br />
+            <a className="underlineHover" href="/sign-up">
+              Don't have account ? Please sign up.
+            </a>
+          </div>
+        </div>
+      </div>
+    </>
   );
 }
