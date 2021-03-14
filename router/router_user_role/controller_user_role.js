@@ -2,7 +2,6 @@ const express = require('express');
 
 const bcrypt = require('bcryptjs');
 const model = require('../../models/index');
-const router = express.Router();
 
 function bcryptFunction(password) {
   return new Promise(function (resolve, reject) {
@@ -17,6 +16,8 @@ function bcryptFunction(password) {
     });
   });
 }
+
+const router = express.Router();
 
 // Get All
 router.get('/user-role', async function (req, res, next) {
@@ -111,9 +112,13 @@ router.post('/user-role', async function (req, res, next) {
     const { name, email, username, password, phone_number } = req.body;
 
     if (!name || !email || !username || !password || !phone_number) {
-      res.send({
-        message: 'Please fill correct field',
-      });
+      const actualPage = '/post';
+      const queryParams = { id: 'Hello World' };
+      req.flash('msg', 'some msg');
+      res.redirect('/post/david');
+      // res.send({
+      //   message: 'Please fill correct field',
+      // });
     } else {
       let getHashPassword = await bcryptFunction(password);
       console.log('Hash: ' + getHashPassword);
@@ -123,7 +128,8 @@ router.post('/user-role', async function (req, res, next) {
         },
       });
       if (user_role_find_one.length > 0) {
-        res.redirect('/');
+        req.flash('msg', 'some msg');
+        res.redirect('/post/david');
         // res.send('Username Sudah ada');
       } else {
         const username_input = await model.users_role.create({
@@ -136,7 +142,8 @@ router.post('/user-role', async function (req, res, next) {
           status: 'Pending',
         });
         if (username_input) {
-          res.redirect('/');
+          req.flash('msg', 'some msg');
+          res.redirect('/post/david');
           // res.send({
           //   status: 'OK',
           //   messages: 'Data Successfully Input',
@@ -150,11 +157,12 @@ router.post('/user-role', async function (req, res, next) {
   } catch (err) {
     if (err) {
       console.log(err);
-      res.send({
-        status: 'ERROR',
-        messages: err.messages,
-        data: {},
-      });
+      res.redirect('/post/david');
+      // res.send({
+      //   status: 'ERROR',
+      //   messages: err.messages,
+      //   data: {},
+      // });
     }
   }
 });

@@ -50,7 +50,7 @@ export default function home() {
               name="phone_number"
               placeholder="Phone Number"
             />
-            <input type="submit" className="fadeIn fourth" value="Log In" />
+            <input type="submit" className="fadeIn fourth" value="Sing Up" />
           </form>
         </div>
       </div>
