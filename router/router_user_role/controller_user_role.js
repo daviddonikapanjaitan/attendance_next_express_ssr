@@ -1,4 +1,5 @@
 const express = require('express');
+const passport = require('passport');
 
 const bcrypt = require('bcryptjs');
 const model = require('../../models/index');
@@ -39,6 +40,14 @@ router.get('/user-role', async function (req, res, next) {
       });
     }
   }
+});
+
+router.post('/user-validation', async function (req, res, next) {
+  passport.authenticate('local', {
+    successRedirect: '/dashboard',
+    failureRedirect: '/login',
+    failureFlash: true,
+  })(req, res, next);
 });
 
 // GET Users by username

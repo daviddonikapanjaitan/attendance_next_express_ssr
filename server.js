@@ -25,17 +25,19 @@ app
         saveUninitialized: true,
       })
     );
+    // Passport Conifg
+    require('./config/passport')(passport);
 
     // Passport middleware
     server.use(passport.initialize());
     server.use(passport.session());
     server.use('/api', user_role_controller);
     server.get('/login', (req, res) => {
-      const message = req.flash('msg');
-      console.log();
+      const message = req.flash('message');
+      console.log(message);
       const actualPage = '/login';
-      const queryParams = { msg: message };
-      app.render(req, res, actualPage, queryParams);
+      const flashMessage = { msg: message };
+      app.render(req, res, actualPage, flashMessage);
     });
     server.get('/sign-up', (req, res) => {
       const message = req.flash('msg');

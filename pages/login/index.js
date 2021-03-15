@@ -9,19 +9,19 @@ const Login = (props) => {
       <div className="wrapper fadeInDown">
         <div id="formContent">
           <div className="fadeIn first">Login Page</div>
-          <form method="POST" action="/api/validation-login">
+          <form method="POST" action="/api/user-validation">
             <input
               type="text"
-              id="login"
+              id="username"
               className="fadeIn second"
-              name="login"
-              placeholder="login"
+              name="username"
+              placeholder="username"
             />
             <input
               type="text"
               id="password"
               className="fadeIn third"
-              name="login"
+              name="password"
               placeholder="password"
             />
             <input type="submit" className="fadeIn fourth" value="Log In" />
