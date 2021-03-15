@@ -114,8 +114,8 @@ router.post('/user-role', async function (req, res, next) {
     if (!name || !email || !username || !password || !phone_number) {
       const actualPage = '/post';
       const queryParams = { id: 'Hello World' };
-      req.flash('msg', 'some msg');
-      res.redirect('/post/david');
+      req.flash('msg', 'Please fill correct field');
+      res.redirect('/sign-up');
       // res.send({
       //   message: 'Please fill correct field',
       // });
@@ -128,8 +128,8 @@ router.post('/user-role', async function (req, res, next) {
         },
       });
       if (user_role_find_one.length > 0) {
-        req.flash('msg', 'some msg');
-        res.redirect('/post/david');
+        req.flash('msg', 'Username has been registered');
+        res.redirect('/sign-up');
         // res.send('Username Sudah ada');
       } else {
         const username_input = await model.users_role.create({
@@ -142,8 +142,8 @@ router.post('/user-role', async function (req, res, next) {
           status: 'Pending',
         });
         if (username_input) {
-          req.flash('msg', 'some msg');
-          res.redirect('/post/david');
+          req.flash('msg', 'Registration Success');
+          res.redirect('/login');
           // res.send({
           //   status: 'OK',
           //   messages: 'Data Successfully Input',
@@ -157,7 +157,7 @@ router.post('/user-role', async function (req, res, next) {
   } catch (err) {
     if (err) {
       console.log(err);
-      res.redirect('/post/david');
+      res.redirect('/sign-up');
       // res.send({
       //   status: 'ERROR',
       //   messages: err.messages,

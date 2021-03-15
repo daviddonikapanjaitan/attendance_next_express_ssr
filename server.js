@@ -30,8 +30,21 @@ app
     server.use(passport.initialize());
     server.use(passport.session());
     server.use('/api', user_role_controller);
+    server.get('/login', (req, res) => {
+      const message = req.flash('msg');
+      console.log();
+      const actualPage = '/login';
+      const queryParams = { msg: message };
+      app.render(req, res, actualPage, queryParams);
+    });
+    server.get('/sign-up', (req, res) => {
+      const message = req.flash('msg');
+      console.log(message);
+      const actualPage = '/sign-up';
+      const flashMessage = { msg: message };
+      app.render(req, res, actualPage, flashMessage);
+    });
     server.get('/post/:id', (req, res) => {
-      console.log(req.flash('msg'));
       const actualPage = '/post';
       const queryParams = { id: req.params.id };
       app.render(req, res, actualPage, queryParams);

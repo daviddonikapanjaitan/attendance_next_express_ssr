@@ -1,6 +1,6 @@
 import Header from '../components/Header';
 
-export default function home() {
+const SignUp = (props) => {
   return (
     <>
       <Header />
@@ -50,10 +50,19 @@ export default function home() {
               name="phone_number"
               placeholder="Phone Number"
             />
+            <p>
+              <div>{props.myParams.msg}</div>
+            </p>
             <input type="submit" className="fadeIn fourth" value="Sing Up" />
           </form>
         </div>
       </div>
     </>
   );
-}
+};
+
+SignUp.getInitialProps = ({ query }) => {
+  return { myParams: query };
+};
+
+export default SignUp;
