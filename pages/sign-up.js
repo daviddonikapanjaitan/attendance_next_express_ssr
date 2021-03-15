@@ -51,7 +51,7 @@ const SignUp = (props) => {
               placeholder="Phone Number"
             />
             <p>
-              <div>{props.myParams.msg}</div>
+              <div className="text-danger">{props.myParams.msg}</div>
             </p>
             <input type="submit" className="fadeIn fourth" value="Sing Up" />
           </form>

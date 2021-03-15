@@ -18,14 +18,15 @@ const Login = (props) => {
               placeholder="username"
             />
             <input
-              type="text"
+              type="password"
               id="password"
               className="fadeIn third"
               name="password"
               placeholder="password"
             />
-            <input type="submit" className="fadeIn fourth" value="Log In" />
+            <p className="text-danger">{props.message.error_msg}</p>
             <p className="text-success">{props.message.msg}</p>
+            <input type="submit" className="fadeIn fourth" value="Log In" />
           </form>
           <div id="formFooter">
             <a className="underlineHover" href="#">

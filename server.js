@@ -5,6 +5,7 @@ const dev = process.env.NODE_ENV !== 'production';
 const user_role_controller = require('./router/router_user_role/controller_user_role');
 const passport = require('passport');
 const session = require('express-session');
+const { ensureAuthenticated } = require('./config/auth');
 
 const app = next({ dev });
 const handle = app.getRequestHandler();
@@ -33,11 +34,16 @@ app
     server.use(passport.session());
     server.use('/api', user_role_controller);
     server.get('/login', (req, res) => {
-      const message = req.flash('message');
-      console.log(message);
+      const message = req.flash('msg');
+      const error_message = req.flash('error');
       const actualPage = '/login';
-      const flashMessage = { msg: message };
-      app.render(req, res, actualPage, flashMessage);
+      if (error_message.length > 0) {
+        const flashMessage = { error_msg: error_message };
+        app.render(req, res, actualPage, flashMessage);
+      } else {
+        const flashMessage = { msg: message };
+        app.render(req, res, actualPage, flashMessage);
+      }
     });
     server.get('/sign-up', (req, res) => {
       const message = req.flash('msg');
@@ -50,6 +56,17 @@ app
       const actualPage = '/post';
       const queryParams = { id: req.params.id };
       app.render(req, res, actualPage, queryParams);
+    });
+    server.get('/', ensureAuthenticated, (req, res) => {
+      return handle(req, res);
+    });
+    server.get('/dashboard', ensureAuthenticated, (req, res) => {
+      return handle(req, res);
+    });
+    server.get('/logout', ensureAuthenticated, (req, res) => {
+      req.logout();
+      req.flash('msg', 'You are logged out');
+      res.redirect('/login');
     });
     server.get('*', (req, res) => {
       return handle(req, res);
