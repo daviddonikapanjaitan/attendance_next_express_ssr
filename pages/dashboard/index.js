@@ -1,7 +1,8 @@
 import Header from '../../components/Header';
+import MaterialForm from "../../components/MaterialForm";
 
 const Dashboard = (props) => {
-  return <>Dashboard</>;
+  return <MaterialForm />;
 };
 
 Dashboard.getInitialProps = ({ query }) => {

@@ -12,14 +12,19 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@zeit/next-css": "^1.0.1",
     "bcryptjs": "^2.4.3",
     "chalk": "^4.1.0",
     "connect-flash": "^0.1.1",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "md5": "^2.3.0",
+    "mdbreact": "^5.1.0",
     "mysql2": "^2.2.5",
     "next": "^10.0.8",
+    "next-compose-plugins": "^2.2.1",
+    "next-fonts": "^1.5.1",
+    "next-images": "^1.8.1",
     "nodemon": "^2.0.7",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
@@ -27,6 +32,10 @@
     "react-dom": "^17.0.1",
     "sequelize": "^6.5.0",
     "serve": "^11.3.2",
-    "sharp": "^0.27.1"
+    "sharp": "^0.27.1",
+    "styled-jsx": "^3.4.4"
+  },
+  "devDependencies": {
+    "sequelize-cli": "^6.2.0"
   }
 }
